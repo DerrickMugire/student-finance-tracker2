@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0">
+    <title>finance Tracker - Validation Tests</title>
+    <head>
+    <body>
+        <main>
+            <h1>Validation Tests</h1>
+            <p>Testing the student Finance Tracker input rules.</p>
+
+            <p id = "summary" aria-live="polite">Tests have not run yet.</p>
+
+            <ul id="tests-result"></ul>
+            <main>
+             <script>
+
+        const resultsList = document.getElementsById("test-results");
+        const summary = document.getElementById("summary");
+
+        let passed = 0;
+        let failed = 0;
+
+        function test(description, condition) {
+            const item = document.createElement("li");
+
+            if(condition) {
+                item.textContent = "PASS:" + description;
+                passed++;
+            } else {
+                item.textContent = "FAIL: " + description;
+                failed++;
+            }
+
+            resultsList.appendChild(item);
+        }
+
+function matches (pattern, value){
+    return pattern.test(value);
+}
+
+const amountPattern = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
+const categoryPattern = /^[A-Za-z]+ (?:[-][A-Za-z])+)*$/;
+const duplicateWordPattern = /\b(\w+)\s+\1\b/i;
+const descriptionPattern = /^\S(?:.*\S)?$/;
+
+test("Valid amount is accepted", matches(amountPattern, "12.50"));
+test("Amount with three decimal places is rejected", !matches(amountPattern, "12.345"));
+test("Zero amount format is recognized" , matches(amountPattern,"0"));
+test("valid category is acceepted", matches(categoryPattern,"SchoolFees"));
+test("Category containing numbers is rejected", !matches(categoryPattern, "Food123"));
+test("Repeated words are detected", matches(duplicateWordPattern, "lunch lunch"));
+test("Ordinary description has no repeated words", !matches(duplicateWordPattern, "lunch lunch"));
+test(
+    "Normal description is accepted",
+    matches(descriptionPattern, "lunch")
+);
+test{
+    "Empty descripton is rejected",
+    !matches(descriptionPattern, "Lunch")
+};
+
+test(
+    "Empty description is rejected "
+    !matches(descriptionPattern, "Lunch")
+);
+
+// ADD THE DATE FUNCTION HERE
+function is ValiDate(dateString) {
+    const datePattern =
+    /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+    if (!datePattern.test(dateString)) {
+        return false;
+    }
+    const date = new Date(dateString + "T00:00:00");
+
+    return{
+        date.getFullYear()=== Number(dateString.slice(0,4)) &&
+        date.getMonth() + 1 === Number (dateString.Slice(5,7))&&
+        date.getDate() === Number(dateString.slice(8,10))
+    };
+}
+    // ADD THE THREE DATE TESTS HERE
+    test("Valid calendar date is accepted", isValidDate("2026-10-13"));
+    test("invalid calendar date is rejected", is ValidDate("2026-02-31"));
+    test(" Incorrect date format is rejected", !is Validate("13-10-2026"));
+ 
+    // KEEP YOUR SUMMARY BELOW THE TESTS
+    summary.textContent =
+    passed + " tests passed; " + failed + "test failed.";
+    </script>
+    </body>
+    <html>
+
+    
+              
